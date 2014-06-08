@@ -1,0 +1,13 @@
+def start():
+    import sys
+    import subprocess
+    import time
+    print sys.argv
+    subprocess.Popen(["sh", "compile"])
+    s = "java -cp .:../external/*:../external/boofcv/*:ab/demo/ ab/demo/MainEntry -nasc".split()
+    print s+sys.argv[1:]
+    subprocess.Popen(["java","-jar","../Server.jar","0","&"])
+    time.sleep(2)
+    subprocess.Popen(s+sys.argv[1:])
+
+start()

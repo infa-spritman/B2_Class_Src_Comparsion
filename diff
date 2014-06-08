@@ -1,0 +1,84 @@
+diff -bur ../../abV1.22/src/ab/demo/abTrajectory.java ./ab/demo/abTrajectory.java
+--- ../../abV1.22/src/ab/demo/abTrajectory.java	2013-08-01 22:16:59.157708159 +0530
++++ ./ab/demo/abTrajectory.java	2013-05-08 09:41:37.000000000 +0530
+@@ -49,7 +49,7 @@
+ 
+ 		System.out.println("Server started on port: " + server.getPort());
+ 
+-		System.out.println("~Waiting for client to connect");
++		System.out.println("Waiting for client to connect");
+ 		server.waitForClients(1);
+ 
+             } catch (UnknownHostException e) {
+diff -bur ../../abV1.22/src/ab/vision/TestVision.java ./ab/vision/TestVision.java
+--- ../../abV1.22/src/ab/vision/TestVision.java	2013-07-29 22:02:56.000000000 +0530
++++ ./ab/vision/TestVision.java	2013-08-02 20:16:58.000000000 +0530
+@@ -106,7 +106,6 @@
+ 		List<Rectangle> blackBirds = vision.findBlackBirds();
+ 		List<Rectangle> TNTs = vision.findTNTs();
+ 		List<Point> trajPoints = vision.findTrajPoints();
+-		List<Point> terrain = vision.findTerrain();
+ 
+ 		Rectangle sling = vision.findSlingshot();
+ 
+@@ -129,7 +128,6 @@
+ 				Color.PINK);
+ 		VisionUtils.drawBoundingBoxes(screenshot, blackBirds,
+ 				Color.BLACK);
+-		VisionUtils.drawTerrain(screenshot, terrain, Color.MAGENTA);
+ 		if (sling != null) {
+ 			VisionUtils.drawBoundingBox(screenshot, sling, Color.ORANGE,
+ 					Color.BLACK);
+diff -bur ../../abV1.22/src/ab/vision/VisionUtils.java ./ab/vision/VisionUtils.java
+--- ../../abV1.22/src/ab/vision/VisionUtils.java	2013-07-29 23:48:45.000000000 +0530
++++ ./ab/vision/VisionUtils.java	2013-07-19 17:18:38.000000000 +0530
+@@ -31,23 +31,10 @@
+ 
+ import javax.imageio.ImageIO;
+ 
+-import java.awt.image.ColorModel;
+-import java.awt.image.WritableRaster;
+-
+ /* VisionUtils ------------------------------------------------------------ */
+ 
+ public class VisionUtils {
+ 
+-	// make a copy of the given BufferedImage
+-    public static BufferedImage copyImage(BufferedImage screenshot) {
+-    	ColorModel cm = screenshot.getColorModel();
+-		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+-		WritableRaster raster = screenshot.copyData(null);
+-		BufferedImage scrShot = new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+-
+-		return scrShot;
+-    }
+-
+ 	// crops a bounding box to be within an image
+ 	public static Rectangle cropBoundingBox(Rectangle r, Image img) {
+ 		return cropBoundingBox(r, img.getWidth(null), img.getHeight(null));
+@@ -443,16 +430,6 @@
+ 		return drawBoundingBoxes(canvas, boxes, fgColour, Color.WHITE);
+ 	}
+ 
+-	// draws terrain onto an image
+-	public static BufferedImage drawTerrain(BufferedImage canvas, List<Point> terrain, Color bgColor) {
+-		Graphics2D g2d = canvas.createGraphics();
+-		g2d.setColor(bgColor);
+-		for(Point p : terrain) {
+-			g2d.drawRect((int)p.getX(),(int)p.getY(),1,1);
+-		}
+-		return canvas;
+-	}
+-
+ 	// draw trajectory parabola
+ 	public static BufferedImage drawtrajectory(BufferedImage canvas,
+ 			int parabola[][], Color bgColour) {
+Only in ../../abV1.22/src/: ab.tar.gz
+Only in ../../abV1.22/src/: classes.list
+Only in ../../abV1.22/src/: compile
+Only in .: diff
+Only in ../../abV1.22/src/: MANIFEST.MF
+Only in ../../abV1.22/src/: org
+Only in ../../abV1.22/src/: s-birds_Client.jar
+Only in ../../abV1.22/src/: start
+Only in ../../abV1.22/src/: start.py

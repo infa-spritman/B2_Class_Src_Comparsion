@@ -1,0 +1,1 @@
+ find . -name "*.class" > classes.list | jar -cfm ../s-birds.jar MANIFEST.MF @classes.list *.jar
